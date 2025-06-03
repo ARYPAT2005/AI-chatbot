@@ -11,19 +11,16 @@ const client = new OpenAI({
     apiKey: process.env.OPEN_AI_API
 });
 
-let output = "";
 let chatOutput =""
 app.listen(3000, () => {
     console.log("Server started")
 })
 
 app.get('/', (req, res) => {
-    res.send(output);
+    
 })
 app.post('/', async (req, res) => {
-    console.log("Recieved body",req.body)
     const body = req.body;
-    output = body[2].content;
     const response = await client.responses.create({
         model: "gpt-4o",
         input: [{role:systemMessage.role, content:systemMessage.content},
@@ -31,6 +28,6 @@ app.post('/', async (req, res) => {
         ]
     });
     chatOutput = response.output_text;
-    console.log(chatOutput);
-    res.send("Response was a success")
+    console.log(chatOutput)
+    res.json(chatOutput)
 })
