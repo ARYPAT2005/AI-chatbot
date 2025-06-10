@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 import express from "express";
 import  systemMessage  from "./systemMessage.js";
 import cors from "cors";
+import { connectToDatabase } from "./database/connectionToDB.js";
+import authRoutes from "./routes/auth-route.js"
 const app = express();
 app.use(cors())
 app.use(express.json())
@@ -28,6 +30,12 @@ app.post('/', async (req, res) => {
         ]
     });
     chatOutput = response.output_text;
-    console.log(chatOutput)
     res.json(chatOutput)
 })
+
+//Database
+
+connectToDatabase();
+
+app.use("/api/auth", authRoutes);
+

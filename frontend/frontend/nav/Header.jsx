@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <>
             <nav className="flex items-center justify-between h-16 border-b border-gray-300 px-4">
-                {/* Logo and links */}
+                
                 <div className="flex items-center gap-4">
                     <Link to="/" className="flex flex-row gap-2 items-center">
                         <BsFillMortarboardFill className="w-9 h-9" />
@@ -27,8 +27,6 @@ const Header = () => {
                         </Link>
                     </div>
                 </div>
-
-                {/* Desktop links */}
                 <div className="hidden sm:flex gap-4 items-center">
                     <Link to="/register" className={`${location.pathname === "/register" ? "font-bold" : "font-thin"}`}>
                         <h2>Register</h2>
