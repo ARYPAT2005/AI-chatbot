@@ -1,13 +1,15 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
-
+import { useAuthStore } from "../store/authStore.js"
+import { useNavigate } from "react-router-dom";
 export default function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   })
-
+  const { signup, isLoading, error, user } = useAuthStore();
+  console.log(user);
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -28,7 +30,6 @@ export default function Register() {
       }))
     }
   }
-
   const validateForm = () => {
     let valid = true
     const newErrors = { ...errors }
@@ -58,13 +59,15 @@ export default function Register() {
     return valid
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (validateForm()) {
       console.log("Form submitted:", formData)
       alert("Sign up successful!")
     }
+    await signup(formData.email, formData.password, formData.name)
+    navigate("/verify-email");
   }
 
   return (
@@ -157,13 +160,14 @@ export default function Register() {
                 )}
               </div>
             </div>
-
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <div>
               <button
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                disabled={isLoading}
               >
-                Sign up
+                {isLoading ? "Loading..." : "Sign Up"}
               </button>
             </div>
           </form>

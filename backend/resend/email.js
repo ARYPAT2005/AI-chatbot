@@ -2,7 +2,6 @@ import { resend } from "./config.js"
 import { verificationTokenEmailTemplate, WELCOME_EMAIL_TEMPLATE } from "./email-templates.js";
 export const sendVerificationEmail = async (email, verificationToken) => {
     try {
-
        const { data, error } = await resend.emails.send({
         from: "Acme <onboarding@resend.dev>",
         to: [email],

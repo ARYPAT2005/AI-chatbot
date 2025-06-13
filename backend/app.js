@@ -6,7 +6,10 @@ import cors from "cors";
 import { connectToDatabase } from "./database/connectionToDB.js";
 import authRoutes from "./routes/auth-route.js"
 const app = express();
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5180',
+    credentials: true,
+}))
 app.use(express.json())
 dotenv.config();
 const client = new OpenAI({
