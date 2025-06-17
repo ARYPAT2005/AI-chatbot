@@ -5,9 +5,11 @@ import  systemMessage  from "./systemMessage.js";
 import cors from "cors";
 import { connectToDatabase } from "./database/connectionToDB.js";
 import authRoutes from "./routes/auth-route.js"
+import cookieParser from 'cookie-parser';
 const app = express();
+app.use(cookieParser())
 app.use(cors({
-    origin: 'http://localhost:5180',
+    origin: 'http://localhost:5175',
     credentials: true,
 }))
 app.use(express.json())

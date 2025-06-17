@@ -10,8 +10,7 @@ export const verifyToken = (req, res, next) => {
         if(!decoded) {
             return res.status(401).json({success:false, message:"Unauthorized"})
         }
-        console.log(decoded);
-        req.userId = decoded.userId;
+        req.userId = decoded.userID;
         next();
     } catch (error) {
         console.log(error);

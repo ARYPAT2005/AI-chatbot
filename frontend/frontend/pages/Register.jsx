@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore.js"
 import { useNavigate } from "react-router-dom";
 export default function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -64,10 +65,10 @@ export default function Register() {
 
     if (validateForm()) {
       console.log("Form submitted:", formData)
-      alert("Sign up successful!")
+      await signup(formData.email, formData.password, formData.name)
+      navigate("/verify-email");
     }
-    await signup(formData.email, formData.password, formData.name)
-    navigate("/verify-email");
+    
   }
 
   return (
