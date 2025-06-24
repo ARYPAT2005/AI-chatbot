@@ -84,7 +84,6 @@ export const useAuthStore = create((set) => ({
             }) 
             
             if (!response.ok) {
-                // 401 is expected when not logged in
                 if (response.status === 401) {
                     console.log("User not authenticated (expected)")
                     set({isAuthenticated: false, user: null, isCheckingAuth: false })
@@ -246,10 +245,6 @@ export const useAuthStore = create((set) => ({
             })
             const data = await response.json();
             console.log("Data",data)
-            if (response.ok) {
-                set({ isAuthenticated: true, user: data.user });
-            }
-            
             return data;
         } catch (error) {
             console.log(error)

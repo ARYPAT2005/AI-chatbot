@@ -24,7 +24,9 @@ export default function ForgotPasswordPage() {
     if (response && response.message === "Password reset link sent to email") {
       toast.success(response.message)
       navigate("/code-verification")
+      set({isLoading: false})
     } else {
+      set({isLoading: false})
       toast.error(response?.message || "Failed to send reset email")
     }
   }

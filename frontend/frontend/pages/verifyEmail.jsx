@@ -66,7 +66,7 @@ export default function VerifyEmail() {
       const response = await verifyEmail(verificationCode);
       if (response.success === true ) {
         toast.success("Email Verified! Your email has been verified successfully.")
-        Navigate("/Pharma")
+        Navigate("/")
       } else {
         toast.error("Verification error")
       }

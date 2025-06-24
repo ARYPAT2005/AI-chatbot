@@ -12,10 +12,11 @@ import { generateVerificationToken } from "./controllers/utils/generateVerificat
 import { sendPasswordResetEmail } from "./resend/email.js";
 
 
+
 const app = express();
 app.use(cookieParser())
 app.use(cors({
-    origin: 'http://localhost:5174',
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
     credentials: true,
 }))
 app.use(express.json())
@@ -57,7 +58,9 @@ app.post("/create-flashcards", async (req, res) => {
 
 app.post("/save-flashcards", verifyToken, async (req, res) => {
     try {
+        console.log("save-flashcards - req.userId:", req.userID);
         const user = await User.findById(req.userId);
+        console.log("save-flashcards - user found:", user ? "Yes" : "No");
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -108,7 +111,8 @@ app.post("/forgot-password", async (req, res) => {
         const resetToken = generateVerificationToken();
         
         user.resetPasswordToken = resetToken;
-        user.resetPasswordExpiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+        user.resetPasswordExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
+        
         
         await user.save();
         
@@ -121,34 +125,7 @@ app.post("/forgot-password", async (req, res) => {
     }
 });
 
-app.post("/reset-password", async (req, res) => {
-    try {
-        const { email, resetToken, newPassword } = req.body;
-        
-        const user = await User.findOne({ 
-            email,
-            resetPasswordToken: resetToken,
-            resetPasswordExpiresAt: { $gt: new Date() }
-        });
-        
-        if (!user) {
-            return res.status(400).json({ message: "Invalid or expired reset token" });
-        }
-        const bcrypt = await import('bcrypt');
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        
-        user.password = hashedPassword;
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpiresAt = undefined;
-        
-        await user.save();
-        
-        res.json({ message: "Password reset successfully" });
-    } catch (error) {
-        console.log("Error resetting password:", error);
-        res.status(500).json({ message: "Failed to reset password" });
-    }
-});
+
 app.post("/verify-code", async (req, res) => {
     const { code, email } = req.body;
     console.log(code,email)
@@ -170,10 +147,7 @@ app.post("/verify-code", async (req, res) => {
 })  
 app.post("/reset-password", async (req, res) => {
     try {
-        const { email, newPassword } = req.body;
-        
-        console.log("Reset password request:", { email, resetToken, newPassword: "***" });
-        
+        const { email, newPassword } = req.body;        
         const user = await User.findOne({ 
             email
         });
@@ -191,9 +165,6 @@ app.post("/reset-password", async (req, res) => {
         user.resetPasswordExpiresAt = undefined;
         
         await user.save();
-        
-        const { generateJWTToken } = await import('./controllers/utils/generateJWTToken.js');
-        generateJWTToken(res, user._id);
         
         console.log("Password reset successful for user:", user.email);
         
