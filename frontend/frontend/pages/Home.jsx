@@ -3,8 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { GraduationCap, MessageSquare, BookOpen, ArrowRight, Target } from "lucide-react"
 import { Link } from "react-router-dom"
-
+import { useAuthStore } from "../store/authStore"
 export default function Home() {
+  const { user, isAuthenticated } = useAuthStore();
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white mt-0 pt-0">
       <section className="py-20 px-4 mt-0 pt-10">
@@ -21,11 +22,15 @@ export default function Home() {
             clinical scenarios to build confidence for your career.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-3">
-              <Link to="/register">
-                Start Learning Now
-              </Link>
-            </Button>
+           
+              {
+                !user && !isAuthenticated &&
+                <Link to="/login">
+                  <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-lg px-8 py-3">
+                   Start Learning Now
+                  </Button>
+                </Link>
+              }
           </div>
         </div>
       </section>
@@ -88,7 +93,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">

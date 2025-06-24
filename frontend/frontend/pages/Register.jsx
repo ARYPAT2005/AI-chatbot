@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore.js"
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner"
+
 export default function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -65,8 +67,14 @@ export default function Register() {
 
     if (validateForm()) {
       console.log("Form submitted:", formData)
-      await signup(formData.email, formData.password, formData.name)
-      navigate("/verify-email");
+      const response = await signup(formData.email, formData.password, formData.name)
+      console.log(response)
+      if (response.success == true) {
+        navigate("/verify-email");
+      } else {
+        toast.error(response.message)
+      }
+     
     }
     
   }

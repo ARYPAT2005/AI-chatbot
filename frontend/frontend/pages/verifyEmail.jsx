@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
+import { useNavigate } from "react-router-dom"
 import {
   Card,
   CardContent,
@@ -10,10 +11,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useAuthStore } from "../store/authStore.js"
+
 export default function VerifyEmail() {
+  const Navigate = useNavigate();
   const [code, setCode] = useState(["", "", "", "", "", ""])
   const inputRefs = useRef([])
   const { verifyEmail, isLoading, error } = useAuthStore();
+  const [input, setInput] = useState("");
+
   const handleChange = (index, value) => {
     
     if (value.length > 1) return
@@ -26,7 +31,7 @@ export default function VerifyEmail() {
     setCode(newCode)
 
     
-    if (value && index < 5) {
+    if (value && index < 5) { 
       inputRefs.current[index + 1]?.focus()
     }
   }
@@ -58,10 +63,10 @@ export default function VerifyEmail() {
     const verificationCode = code.join("")
 
     if (verificationCode.length === 6) {
-      console.log(verificationCode)
       const response = await verifyEmail(verificationCode);
       if (response.success === true ) {
         toast.success("Email Verified! Your email has been verified successfully.")
+        Navigate("/Pharma")
       } else {
         toast.error("Verification error")
       }

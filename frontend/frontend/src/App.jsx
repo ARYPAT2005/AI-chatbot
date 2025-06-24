@@ -13,6 +13,9 @@ import { useAuthStore } from '../store/authStore.js';
 import { useEffect } from "react"
 import { buttonVariants } from './components/ui/button';
 import { Button } from '@chatscope/chat-ui-kit-react';
+import ForgotPassword from '../pages/ForgotPassword';
+import CodeVerification from '../pages/CodeVerification';
+import ResetPassword from '../pages/ResetPassword';
 
 // import { Navigate } from "react-router-dom"
 
@@ -44,6 +47,9 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/verify-email" element={<VerifyEmail />}></Route>
+            <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+            <Route path="/code-verification" element={<CodeVerification />}></Route>
+            <Route path="/reset-password" element={<ResetPassword />}></Route>
           </Route>
       </Routes>
       <Toaster/>

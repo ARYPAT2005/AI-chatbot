@@ -11,7 +11,7 @@ export const signup = async (req, res) => {
         }
         const userExist = await User.findOne({ email });
         if (userExist) {
-            return res.status(400).json({message: "User already exists"});
+            return res.status(400).json({ succes: false, message: "User already exists"});
         }
         const hashedPassword = await bcrypt.hash(password, 10) ;
         const verificationToken = generateVerificationToken();
@@ -61,6 +61,10 @@ export const login = async (req, res) => {
         res.status(200).json({
             success:true,
             message: "Login successful",
+            user: {
+                ...user._doc,
+                password: undefined
+             }
         })
     } catch (error) {
         console.log("Error loggin in", error);
@@ -93,12 +97,12 @@ export const verifyEmail = async (req, res) => {
         }
         user.isVerified = true;
         user.verificationToken = undefined;
-        user.verificationTokenExpireAt = undefined;
+        user.verificationTokenExpiresAt = undefined;
 
         await user.save();
 
         await sendWelcomeEmail(user.email, user.name)
-        res.status(200).json({ success: true, message: "Email verified succssfully"})
+        res.status(200).json({ success: true, message: "Email verified successfully"})
     } catch (error) {
         console.log("Error verifying email", error)
         res.status(400).json({ success: false, message: error.message })
@@ -133,11 +137,17 @@ export const resetPassword = async (req, res) => {
 export const checkAuth = async (req, res) => {
     try {
         const user = await User.findById(req.userId)
-        console.log(user)
         if (!user) {
             return res.status(400).json({success: false, message: "User not found"});
         }
-        res.status(200).json({ success: true, message: "User was found"})
+        res.status(200).json({ 
+            success: true, 
+            message: "User was found",
+            user: {
+                ...user._doc,
+                password: undefined
+            }
+        })
     } catch (error) {
         console.log("Error checking auth", error)
         res.status(400).json({ success: false, message: error.message})

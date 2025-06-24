@@ -21,7 +21,11 @@ const userSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpiresAt: Date,
     verificationToken: String,
-    verificationTokenExpiresAt: Date
+    verificationTokenExpiresAt: Date,
+    flashcards: {
+        type: Array,
+        default: []
+    }
 })
 
 export const User = mongoose.model("User", userSchema);

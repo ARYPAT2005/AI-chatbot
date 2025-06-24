@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner"
 
 export default function Component() {
   const Navigate = useNavigate();
@@ -14,8 +15,13 @@ export default function Component() {
   const { login, isLoading, error } = useAuthStore();
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await login(email, password);
-    Navigate("/");
+    const result =await login(email, password);
+    if (result.success == true) {
+      Navigate("/");
+    } else {
+      toast.error(result.message);
+    }
+    
   }
 
   return (
@@ -63,6 +69,9 @@ export default function Component() {
                   required
                 />
               </div>
+              <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
+                Forgot Password?
+              </Link>
               <Button
                 type="submit"
                 className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg mt-8"
