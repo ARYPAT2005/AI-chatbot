@@ -86,7 +86,6 @@ export const useAuthStore = create((set) => ({
             if (!response.ok) {
                 // 401 is expected when not logged in
                 if (response.status === 401) {
-                    console.log("User not authenticated (expected)")
                     set({isAuthenticated: false, user: null, isCheckingAuth: false })
                     return
                 }
@@ -217,7 +216,6 @@ export const useAuthStore = create((set) => ({
         }
     },
     verifyCode: async (code) => {
-        console.log("Users:",code, useAuthStore.getState().email)
         try {
             const response = await fetch(`http://localhost:3000/verify-code`, {
                 method: "POST",
@@ -246,9 +244,9 @@ export const useAuthStore = create((set) => ({
             })
             const data = await response.json();
             console.log("Data",data)
-            if (response.ok) {
-                set({ isAuthenticated: true, user: data.user });
-            }
+            // if (response.ok) {
+            //     set({ isAuthenticated: true, user: data.user });
+            // }
             
             return data;
         } catch (error) {

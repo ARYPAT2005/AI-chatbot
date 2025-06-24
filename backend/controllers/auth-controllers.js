@@ -135,6 +135,7 @@ export const resetPassword = async (req, res) => {
     }
 }
 export const checkAuth = async (req, res) => {
+    console.log(req.userId)
     try {
         const user = await User.findById(req.userId)
         if (!user) {

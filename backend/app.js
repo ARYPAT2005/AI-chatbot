@@ -10,6 +10,7 @@ import { User } from "./model/user.js";
 import { verifyToken } from "./middleware/verifyToken.js";
 import { generateVerificationToken } from "./controllers/utils/generateVerificationToken.js";
 import { sendPasswordResetEmail } from "./resend/email.js";
+import { generateJWTToken } from "./controllers/utils/generateJWTToken.js";
 
 
 const app = express();
@@ -120,35 +121,6 @@ app.post("/forgot-password", async (req, res) => {
         res.status(500).json({ message: "Failed to process password reset request" });
     }
 });
-
-app.post("/reset-password", async (req, res) => {
-    try {
-        const { email, resetToken, newPassword } = req.body;
-        
-        const user = await User.findOne({ 
-            email,
-            resetPasswordToken: resetToken,
-            resetPasswordExpiresAt: { $gt: new Date() }
-        });
-        
-        if (!user) {
-            return res.status(400).json({ message: "Invalid or expired reset token" });
-        }
-        const bcrypt = await import('bcrypt');
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        
-        user.password = hashedPassword;
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpiresAt = undefined;
-        
-        await user.save();
-        
-        res.json({ message: "Password reset successfully" });
-    } catch (error) {
-        console.log("Error resetting password:", error);
-        res.status(500).json({ message: "Failed to reset password" });
-    }
-});
 app.post("/verify-code", async (req, res) => {
     const { code, email } = req.body;
     console.log(code,email)
@@ -171,32 +143,18 @@ app.post("/verify-code", async (req, res) => {
 app.post("/reset-password", async (req, res) => {
     try {
         const { email, newPassword } = req.body;
-        
-        console.log("Reset password request:", { email, resetToken, newPassword: "***" });
-        
         const user = await User.findOne({ 
             email
         });
-        
         if (!user) {
-            console.log("No user found with valid token");
             return res.status(400).json({ message: "Invalid or expired reset token" });
         }
-        
         const bcrypt = await import('bcrypt');
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-        
         user.password = hashedPassword;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpiresAt = undefined;
-        
         await user.save();
-        
-        const { generateJWTToken } = await import('./controllers/utils/generateJWTToken.js');
-        generateJWTToken(res, user._id);
-        
-        console.log("Password reset successful for user:", user.email);
-        
         res.json({ 
             message: "Password reset successfully",
             user: {

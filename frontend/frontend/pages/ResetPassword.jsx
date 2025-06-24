@@ -18,7 +18,6 @@ const ResetPassword = () => {
     e.preventDefault()
     if (passwordsMatch && password.length >= 8) {
       setIsSubmitted(true)
-      console.log(password)
       const response = await resetPassword(password)
       if (response.message === "Password reset successfully") {
         toast.success("Password reset successfully")
