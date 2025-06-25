@@ -7,7 +7,7 @@ import { useAuthStore } from "../store/authStore"
 export default function Home() {
   const { user, isAuthenticated } = useAuthStore();
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white mt-0 pt-0">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <section className="py-20 px-4 mt-0 pt-10">
         <div className="container mx-auto text-center max-w-4xl mt-0">
           <Badge className="mb-4 bg-emerald-100 text-emerald-800 hover:bg-emerald-100">
