@@ -49,7 +49,7 @@ const Chatbot = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+       
 
         const messageByAI = {
           message: data,
@@ -61,7 +61,7 @@ const Chatbot = () => {
         setTyping(false)
       })
       .catch((error) => {
-        console.error("Error processing message:", error)
+       
         setTyping(false)
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -75,7 +75,6 @@ const Chatbot = () => {
   }
 
   return (
-    console.log(isAuthenticated),
     (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
         {isAuthenticated ? (

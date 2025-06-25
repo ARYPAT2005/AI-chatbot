@@ -44,13 +44,8 @@ const Flashcards = () => {
       if (response && response.flashcards) {
         setPastDecks(response.flashcards)
         toast.success(`Deck "${deckToSave.name}" saved successfully!`)
-        console.log("Current decks:", response.flashcards)
-        response.flashcards.forEach((flashcard) => {
-          console.log(flashcard)
-        })
       } else {
         toast.error("Failed to save the deck.")
-        console.error("Error: Response from server did not contain flashcards array.", response)
       }
 
       resetForm()
@@ -73,15 +68,12 @@ const Flashcards = () => {
     const response = await getFlashcards()
     if (response && response.flashcards) {
       setPastDecks(response.flashcards)
-      console.log("Fetched decks:", response.flashcards)
     } else {
-      console.error("Failed to fetch decks or no decks found.")
       setPastDecks([])
     }
   }
 
   const changeDeck = (deck) => {
-    console.log(deck)
     setFlashcards(deck)
   }
 

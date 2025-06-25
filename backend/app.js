@@ -109,16 +109,10 @@ app.post("/forgot-password", async (req, res) => {
         }
 
         const resetToken = generateVerificationToken();
-        
         user.resetPasswordToken = resetToken;
         user.resetPasswordExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
-        
-        
         await user.save();
-        
-        await sendPasswordResetEmail(email, resetToken);
-        
-        res.json({ message: "Password reset link sent to email" });
+        res.json({ message: "Password reset link sent to email", resetToken });
     } catch (error) {
         console.log("Error in forgot password:", error);
         res.status(500).json({ message: "Failed to process password reset request" });

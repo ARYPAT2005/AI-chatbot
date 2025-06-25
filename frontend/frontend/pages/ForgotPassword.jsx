@@ -23,10 +23,10 @@ export default function ForgotPasswordPage() {
     
     if (response && response.message === "Password reset link sent to email") {
       toast.success(response.message)
-      navigate("/code-verification")
-      set({isLoading: false})
+
+      navigate("/reset-password")
     } else {
-      set({isLoading: false})
+
       toast.error(response?.message || "Failed to send reset email")
     }
   }
@@ -56,10 +56,6 @@ export default function ForgotPasswordPage() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-center">
-          {message && <p className="text-sm text-green-500">{message}</p>}
-          {error && <p className="text-sm text-red-500">{error}</p>}
-        </CardFooter>
       </Card>
     </div>
      

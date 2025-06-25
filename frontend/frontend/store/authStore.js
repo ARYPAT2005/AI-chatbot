@@ -93,10 +93,10 @@ export const useAuthStore = create((set) => ({
             }
             
             const data = await response.json();
-            console.log("Auth check response:", data)
+
             
             if (data.success && data.user) {
-                console.log("User authenticated:", data.user)
+                
                 set({isAuthenticated: true, user: data.user, isCheckingAuth: false })
             } else {
                 console.log("No user data in response")
@@ -140,7 +140,6 @@ export const useAuthStore = create((set) => ({
     },
     saveFlashcards: async (flashcards) => {
         try {
-            console.log("Flashcards:", flashcards)
             set({isLoading: true})
             const response = await fetch(`http://localhost:3000/save-flashcards`, {
                 method: "POST",
@@ -244,7 +243,6 @@ export const useAuthStore = create((set) => ({
                 body: JSON.stringify({ email: useAuthStore.getState().email, newPassword })
             })
             const data = await response.json();
-            console.log("Data",data)
             return data;
         } catch (error) {
             console.log(error)

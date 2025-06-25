@@ -22,13 +22,13 @@ export const signup = async (req, res) => {
             verificationToken: verificationToken,
             verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000
         })
-
+        user.isVerified = true;
         await user.save();
 
         generateJWTToken(res, user._id);
 
         await sendVerificationEmail(user.email, verificationToken);
-
+        
         res.status(201).json({ 
              success: true,
              message: "User created successfully",

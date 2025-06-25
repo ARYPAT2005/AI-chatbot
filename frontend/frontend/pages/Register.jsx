@@ -12,7 +12,6 @@ export default function Register() {
     password: "",
   })
   const { signup, isLoading, error, user } = useAuthStore();
-  console.log(user);
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -66,11 +65,9 @@ export default function Register() {
     e.preventDefault()
 
     if (validateForm()) {
-      console.log("Form submitted:", formData)
       const response = await signup(formData.email, formData.password, formData.name)
-      console.log(response)
       if (response.success == true) {
-        navigate("/verify-email");
+        navigate("/login");
       } else {
         toast.error(response.message)
       }
