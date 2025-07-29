@@ -21,6 +21,34 @@ I created a full-stack application called Pharma, an AI-powered study tool for p
 
 ## Setup
 
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/05jwang/Poketrade.git](https://github.com/ARYPAT2005/Pharma.git
+    ```
+2. Run the backend server
+
+    ```bash
+    cd backend
+    npm install
+    Create a .env file in the backend directory and add the following:
+    PORT=5000
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret_key
+    OPENAI_API_KEY=your_openai_api_key
+    Run nodemon app.js or just node app.js if you do not have nodemon installed
+    ```
+
+3.
+    ```bash
+    cd frontend
+    npm install
+    npm run dev
+    ```
+   
+
+
+
 ## Video Link
 
 ## Screenshots
