@@ -39,7 +39,7 @@ I created a full-stack application called Pharma, an AI-powered study tool for p
     Run nodemon app.js or just node app.js if you do not have nodemon installed
     ```
 
-3.
+3. Run the frontend server in a seperate terminal
     ```bash
     cd frontend
     npm install
