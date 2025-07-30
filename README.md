@@ -78,6 +78,15 @@ Flashcards
     style="width: 50%; height: auto;" 
   />
 </figure>
+MongoDB Data
+<div style="text-align: center;">
+  <img 
+    src="https://github.com/user-attachments/assets/56981007-967c-4583-8083-0893f094c807" 
+    alt="image" 
+    style="width: 50%; height: auto;" 
+  />
+</div>
+
 
 
 
