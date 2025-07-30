@@ -78,6 +78,7 @@ Flashcards
     style="width: 50%; height: auto;" 
   />
 </figure>
+
 MongoDB Data
 <div style="text-align: center;">
   <img 
