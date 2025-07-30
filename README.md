@@ -62,13 +62,23 @@ Home Page
 
 Chatbot
 <figure style="text-align: center;">
-  <img width="1274" height="673" alt="image" src="https://github.com/user-attachments/assets/1da0106e-0313-4996-9acc-e2cf2e4ed072" />
+  <img 
+    src="https://github.com/user-attachments/assets/1da0106e-0313-4996-9acc-e2cf2e4ed072" 
+    alt="image" 
+    style="width: 50%; height: auto;" 
+  />
 </figure>
+
 
 Flashcards
 <figure style="text-align: center;">
-  <img width="1274" height="676" alt="image" src="https://github.com/user-attachments/assets/e314cd24-0a23-406d-aaaf-09d3b183793b" />
+  <img 
+    src="https://github.com/user-attachments/assets/e314cd24-0a23-406d-aaaf-09d3b183793b" 
+    alt="image" 
+    style="width: 50%; height: auto;" 
+  />
 </figure>
+
 
 
 
