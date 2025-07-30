@@ -51,5 +51,18 @@ I created a full-stack application called Pharma, an AI-powered study tool for p
 ## Video Link
 
 ## Screenshots
+<figure style="text-align: center;">
+  <img width="1277" height="677" alt="image" src="https://github.com/user-attachments/assets/6259e92b-d83b-460b-84f1-c047045f73f1" />
+</figure>
+
+<figure style="text-align: center;">
+  <img width="1274" height="673" alt="image" src="https://github.com/user-attachments/assets/1da0106e-0313-4996-9acc-e2cf2e4ed072" />
+</figure>
+
+<figure style="text-align: center;">
+  <img width="1274" height="676" alt="image" src="https://github.com/user-attachments/assets/e314cd24-0a23-406d-aaaf-09d3b183793b" />
+</figure>
+
+
 
 
