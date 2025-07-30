@@ -32,7 +32,6 @@ I created a full-stack application called Pharma, an AI-powered study tool for p
     cd backend
     npm install
     Create a .env file in the backend directory and add the following:
-    PORT=5000
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret_key
     OPENAI_API_KEY=your_openai_api_key
