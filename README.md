@@ -49,7 +49,7 @@ I created a full-stack application called Pharma, an AI-powered study tool for p
 
 
 ## Video Link
-
+https://drive.google.com/file/d/1Pl7ypX87DTAzxwuOtCqxqZR0HkAth2gG/view?usp=sharing
 ## Screenshots
 Home Page
 <figure style="text-align: center;">
